@@ -433,7 +433,7 @@ class GoogleGeocoder3Test < BaseGeocoderTest #:nodoc: all
   def test_google3_full_address_with_geo_loc
      response = MockSuccess.new
      response.expects(:body).returns(GOOGLE3_FULL)
-     url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=#{Geokit::Inflector::url_escape(@full_address_short_zip)}"
+     url = "http://maps.google.com/maps/api/geocode/json?sensor=false&key=#{Geokit::Geocoders::google}&address=#{Geokit::Inflector::url_escape(@full_address_short_zip)}"
      Geokit::Geocoders::GoogleGeocoder3.expects(:call_geocoder_service).with(url).returns(response)
      res=Geokit::Geocoders::GoogleGeocoder3.geocode(@google_full_loc)
      assert_equal "CA", res.state
