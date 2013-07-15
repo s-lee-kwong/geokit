@@ -6,7 +6,7 @@ module Geokit
       # Template method which does the reverse-geocode lookup.
       def self.do_reverse_geocode(latlng)
         latlng=LatLng.normalize(latlng)
-        submit_url = submit_url("/maps/api/geocode/json?sensor=false&latlng=#{Geokit::Inflector::url_escape(latlng.ll)}")
+        submit_url = submit_url("/maps/api/geocode/json?sensor=false&key=#{Geokit::Geocoders::google}&latlng=#{Geokit::Inflector::url_escape(latlng.ll)}")
         res = self.call_geocoder_service(submit_url)
         return GeoLoc.new unless (res.is_a?(Net::HTTPSuccess) || res.is_a?(Net::HTTPOK))
         json = res.body
