@@ -42,7 +42,7 @@ module Geokit
       def self.do_geocode(address, options = {})
         bias_str = options[:bias] ? construct_bias_string_from_options(options[:bias]) : ''
         address_str = address.is_a?(GeoLoc) ? address.to_geocodeable_s : address
-        submit_url = submit_url("/maps/api/geocode/json?sensor=false&address=#{Geokit::Inflector::url_escape(address_str)}#{bias_str}")
+        submit_url = submit_url("/maps/api/geocode/json?sensor=false&key=#{Geokit::Geocoders::google}&address=#{Geokit::Inflector::url_escape(address_str)}#{bias_str}")
 
         res = self.call_geocoder_service(submit_url)
         return GeoLoc.new if !res.is_a?(Net::HTTPSuccess)
